@@ -1,0 +1,5 @@
+为了在SpringApplication.run()执行完成之前运行一些自己的代码逻辑，可以通过实现CommandLineRunner或者ApplicationRunner
+CommandLineRunner中args参数就是ApplicationArguments,
+如果应用程序设置了Program arguments: --debug=logfile.txt，
+CommandLineRunner中的其中一个参数就为--debug=logfile.txt,没有任何加工拆解
+ApplicationRunner通过ApplicationArguments参数来获取应用参数

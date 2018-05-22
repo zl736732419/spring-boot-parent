@@ -1,0 +1,60 @@
+<ehcache>
+
+    <!-- 
+          磁盘存储:将缓存中暂时不使用的对象,转移到硬盘,类似于Windows系统的虚拟内存
+          path:指定在硬盘上存储对象的路径
+       -->
+    <diskStore path="java.io.tmpdir"/>
+
+    <!-- 
+        defaultCache:默认的缓存配置信息,如果不加特殊说明,则所有对象按照此配置项处理
+        maxElementsInMemory:设置了缓存的上限,最多存储多少个记录对象，有两种情况：
+        1、若overflowToDisk的属性值为true，会将cache中多出的元素放入磁盘文件中。
+        2、若overflowToDisk的属性值为false，会根据memoryStoreEvictionPolicy的策略替换cache中原有的元素。
+        
+        eternal:代表对象是否永不过期，设置为true时timeToIdleSeconds,timeToLiveSeconds将不起作用
+        
+        timeToIdleSeconds:就是访问这个cache中元素的最大间隔时间，如果超过这个时间没有访问这个cache中的某个元素，
+        那么这个元素将被从cache中清除。
+        
+        timeToLiveSeconds: 这是cache中元素的生存时间。从创建开始计时，当超过这个时间，这个元素将被从cache中清除。
+        
+        overflowToDisk:溢出是否写入磁盘。系统会根据标签<diskStore path="java.io.tmpdir"/> 中path的值查找对应的属性值
+        文件的名称是cache的名称，后缀名的data。如：CACHE_FUNC.data。这个属性在解释maxElementsInMemory的时候也已经说过了。
+        如果为true将会同步到磁盘上否则通过memoryStoreEvictionPolicy替换cache中的原有记录
+        
+        diskExpiryThreadIntervalSeconds  ：磁盘缓存的清理线程运行间隔
+        
+        memoryStoreEvictionPolicy ：内存存储与释放策略。有三个值：
+            LRU －least recently used
+            LFU －least frequently used
+            FIFO－first in first out, the oldest element by creation time
+        
+        diskPersistent ： 是否持久化磁盘缓存,当这个属性的值为true时，系统在初始化的时候会在磁盘中查找文件名为cache名称，
+        后缀名为index的的文件，如CACHE_FUNC.index 
+        这个文件中存放了已经持久化在磁盘中的cache的index，找到后把cache加载到内存。要想把cache真正持久化到磁盘，写程序时必须注意，
+        在是用net.sf.ehcache2x.Cache的void put (Element element)方法后要使用void flush()方法。
+       
+       以上时间值都是以秒作为单位的。 
+        
+    -->
+    <defaultCache maxElementsInMemory="10000" 
+                  eternal="false"
+                  timeToIdleSeconds="120" 
+                  timeToLiveSeconds="120"
+                  overflowToDisk="true"/>
+
+    <cache name="user" 
+           maxEntriesLocalHeap="200" 
+           timeToIdleSeconds="120" 
+           timeToLiveSeconds="600" 
+           eternal="false"
+           overflowToDisk="true"/>
+
+    <cache name="piDecimals"
+           maxEntriesLocalHeap="200"
+           timeToIdleSeconds="120"
+           timeToLiveSeconds="600"
+           eternal="false"
+           overflowToDisk="true"/>
+</ehcache>

@@ -1,0 +1,37 @@
+server:
+    name: zl200
+    url: http://default
+acme:
+    first-name: zl
+    map:
+        key1:
+            name: my name 1
+            address: my description 1
+            url: http://default
+
+---
+spring:
+    profiles: development
+server:
+    name: zl201
+    url: http://development
+acme:
+    firstName: ll
+    map:
+        key1:
+            name: dev name 1
+            url: http://development
+        key2:
+            name: dev name 2
+            address: dev description 2
+            url: http://development
+
+---
+spring:
+    profiles: production
+
+server:
+    name: zl202
+    url: http://production
+acme:
+    first_name: zz
