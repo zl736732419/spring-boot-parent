@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/redis")
 public class RedisController {
-    @Resource(name = "clusterRedisTemplate")
+    @Resource(name = "standaloneRedisTemplate")
     private RedisTemplate<String, String> template;
     
     @GetMapping("/get/{key}")

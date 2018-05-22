@@ -16,6 +16,12 @@
         <module>spring-boot-mybatis</module>
         <module>spring-boot-nosql-redis</module>
         <module>spring-boot-cache-ehcache2</module>
+        <module>spring-boot-cache-ehcache3</module>
+        <module>spring-boot-cache-simple</module>
+        <module>spring-boot-cache-redis</module>
+        <module>spring-boot-message-activemq</module>
+        <module>spring-boot-message-rabbitmq</module>
+        <module>spring-boot-message-kafka</module>
     </modules>
 
     <parent>
@@ -68,9 +74,7 @@
     
     
     <build>
-        <finalName>spring boot父级项目</finalName>
         <plugins>
-
             <!-- Package as an executable jar -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>

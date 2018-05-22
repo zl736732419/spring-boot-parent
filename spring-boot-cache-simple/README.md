@@ -1,0 +1,5 @@
+当springboot中没有提供其他任何缓存的实现，但用户又开启了缓存
+1. 引入spring-boot-starter-cache依赖
+2. 开启缓存注解@EnableCaching
+3. 在service类和方法上打上Spring提供的缓存注解
+那么spring会采用默认的ConcurrentHashMap在内存中实现缓存
