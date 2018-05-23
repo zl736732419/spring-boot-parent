@@ -24,6 +24,8 @@
         <module>spring-boot-message-kafka</module>
         <module>spring-boot-email</module>
         <module>spring-boot-quartz</module>
+        <module>spring-boot-session-redis</module>
+        <module>spring-boot-session-jdbc</module>
     </modules>
 
     <parent>

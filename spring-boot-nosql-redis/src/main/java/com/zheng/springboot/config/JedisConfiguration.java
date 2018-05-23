@@ -88,7 +88,7 @@ public class JedisConfiguration {
         return template;
     }
 
-    @Bean(name = "clusterRedisTemplate")
+//    @Bean(name = "clusterRedisTemplate")
     public RedisTemplate clusterRedisTemplate() {
         // 集群连接工厂
         JedisConnectionFactory factory = convertJedisClusterConnectionFactory();

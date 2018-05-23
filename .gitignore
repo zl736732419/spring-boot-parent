@@ -21,3 +21,7 @@
 /spring-boot-template-thymeleaf/spring-boot-template-thymeleaf.iml
 /spring-boot-web/target/
 /spring-boot-web/spring-boot-web.iml
+/spring-boot-session-jdbc/target/
+/spring-boot-session-jdbc/spring-boot-session-jdbc.iml
+/spring-boot-session-redis/target/
+/spring-boot-session-redis/spring-boot-session-redis.iml
