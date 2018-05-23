@@ -18,6 +18,6 @@
 /spring-boot-template-freemarker/target/
 /spring-boot-template-freemarker/spring-boot-template-freemarker.iml
 /spring-boot-template-thymeleaf/target/
-!/spring-boot-template-thymeleaf/spring-boot-template-thymeleaf.iml
+/spring-boot-template-thymeleaf/spring-boot-template-thymeleaf.iml
 /spring-boot-web/target/
 /spring-boot-web/spring-boot-web.iml
