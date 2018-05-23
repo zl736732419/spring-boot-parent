@@ -22,6 +22,7 @@
         <module>spring-boot-message-activemq</module>
         <module>spring-boot-message-rabbitmq</module>
         <module>spring-boot-message-kafka</module>
+        <module>spring-boot-email</module>
     </modules>
 
     <parent>
