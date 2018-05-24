@@ -26,3 +26,7 @@
 /spring-boot-session-redis/target/
 /spring-boot-session-redis/spring-boot-session-redis.iml
 /spring-boot-cache-simple/spring-boot-cache-simple.iml
+/spring-boot-dbinit-default/spring-boot-dbinit-default.iml
+/spring-boot-dbinit-default/target/
+/spring-boot-dbinit-flyway/spring-boot-dbinit-flyway.iml
+/spring-boot-dbinit-flyway/target/

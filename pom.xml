@@ -26,6 +26,8 @@
         <module>spring-boot-quartz</module>
         <module>spring-boot-session-redis</module>
         <module>spring-boot-session-jdbc</module>
+        <module>spring-boot-dbinit-default</module>
+        <module>spring-boot-dbinit-flyway</module>
     </modules>
 
     <parent>
