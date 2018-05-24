@@ -5,8 +5,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.sql.DataSource;
-
 /**
  * @Author zhenglian
  * @Date 2018/5/23 22:40
@@ -16,7 +14,7 @@ public class JdbcSessionConfig {
     
     @Bean(destroyMethod = "close", initMethod = "init")
     @ConfigurationProperties(prefix = "spring.datasource.druid")
-    public DataSource dataSource() {
+    public DruidDataSource dataSource() {
         return new DruidDataSource();
     }
     

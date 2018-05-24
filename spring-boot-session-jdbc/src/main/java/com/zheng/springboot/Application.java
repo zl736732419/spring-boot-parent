@@ -38,5 +38,4 @@ public class Application {
                 .sources(Application.class)
                 .run(args);
     }
-    
 }

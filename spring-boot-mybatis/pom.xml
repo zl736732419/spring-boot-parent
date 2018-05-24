@@ -33,7 +33,6 @@
             <artifactId>mybatis-paginator</artifactId>
             <version>${mybatis.paginator.version}</version>
         </dependency>
-
         <!-- db -->
         <dependency>
             <groupId>mysql</groupId>
@@ -44,17 +43,13 @@
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
         </dependency>
-        <!--
-        1. 自动创建datasource，如果没有设置的话
-        2. 执行spring.datasource.schema初始化数据库建表DDL
-        3. 执行spring.datasource.data初始化数据库数据
-        4. spring.datasource.initialize=true|false 是否执行数据库初始化工作
-        5. spring.datasource.continueOnError＝true|false 有了错误是否继续执行
-        -->
+
+        <!--配置数据库初始化脚本-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
+
         <!--mybatis xml配置方式所需依赖(这里不采用mybatis starter),采用xml配置可以在配置文件中对事务进行超控，方便统一管理-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
