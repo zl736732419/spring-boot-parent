@@ -30,3 +30,5 @@
 /spring-boot-dbinit-default/target/
 /spring-boot-dbinit-flyway/spring-boot-dbinit-flyway.iml
 /spring-boot-dbinit-flyway/target/
+/spring-boot-dbinit-liquibase/target/
+/spring-boot-dbinit-liquibase/spring-boot-dbinit-liquibase.iml

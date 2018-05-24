@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: zhenglian
+      changes:
+        - createTable:
+            tableName: users4
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(50)
+              - column:
+                  name: pwd
+                  type: varchar(32)
+              - column:
+                  name: age
+                  type: int
+              - column:
+                  name: is_delete
+                  type: int
+              - column:
+                  name: create_time
+                  type: timestamp
+              - column:
+                  name: update_time
+                  type: timestamp
+  - changeSet:
+      id: 2
+      author: zhenglian
+      changes:
+        - insert:
+            tableName: users4
+            columns:
+              - column:
+                  name: username
+                  value: laowang
+              - column:
+                  name: pwd
+                  value: 123456
+              - column:
+                  name: age
+                  value: 20
+              - column:
+                  name: is_delete
+                  value: 0
+              - column:
+                  name: create_time
+                  value: now()
+              - column:
+                  name: update_time
+                  value: now()

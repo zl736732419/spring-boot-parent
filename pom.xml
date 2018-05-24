@@ -28,6 +28,7 @@
         <module>spring-boot-session-jdbc</module>
         <module>spring-boot-dbinit-default</module>
         <module>spring-boot-dbinit-flyway</module>
+        <module>spring-boot-dbinit-liquibase</module>
     </modules>
 
     <parent>
