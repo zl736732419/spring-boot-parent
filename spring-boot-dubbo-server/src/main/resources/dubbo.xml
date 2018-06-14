@@ -14,7 +14,55 @@
     <!-- 用dubbo协议在30001 -->
     <dubbo:protocol name="dubbo" port="30000" dispather="all" threadpool="cached" threads="5000"/>
 
+    <!--
+        retries: failover集群模式下的服务失败重试其他服务器的次数
+
+        线程调度模型
+        如果事件处理的逻辑能迅速完成，并且不会发起新的 IO 请求，比如只是在内存中记个标识，则直接在 IO 线程上处理更快，
+        因为减少了线程池调度。
+        但如果事件处理逻辑较慢，或者需要发起新的 IO 请求，比如需要查询数据库，则必须派发到线程池，否则 IO 线程阻塞，
+        将导致不能接收其它请求。
+        因此，需要通过不同的派发策略和不同的线程池配置的组合来应对不同的场景:
+        <dubbo:protocol name="dubbo" dispatcher="all" threadpool="fixed" threads="100" />
+
+        dispatcher:
+        all: 所有消息都派发到线程池，包括请求，响应，连接事件，断开事件，心跳等
+        direct: 所有消息都不派发到线程池，全部在IO线程上直接执行
+        message: 只有请求响应消息派发到线程池，其它连接断开事件，心跳等消息，直接在 IO 线程上执行
+        execution: 只请求消息派发到线程池，不含响应，响应和其它连接断开事件，心跳等消息，直接在 IO 线程上执行
+        connection: 在IO线程上，将连接断开事件放入队列，有序逐个执行，其它消息派发到线程池
+
+        threadpool:
+        fixed: 固定大小线程池，启动时建立线程，不关闭，一直持有
+        cached: 缓存线程池，空闲一分钟自动删除，需要时重建，如果超出 maximumPoolSize 直接报错 RejectedExecutionException
+        limited: 可伸缩线程池，但池中的线程数只会增长不会收缩。只增长不收缩的目的是为了避免收缩时突然来了大流量引起的性能问题
+        eager: 优先创建 Worker 线程池。在任务数量大于 corePoolSize 但是小于 maximumPoolSize 时，
+        优先创建 Worker 来处理任务。当任务数量大于 maximumPoolSize 时，将任务放入阻塞队列中。
+        阻塞队列充满时抛出 RejectedExecutionException。
+        (相比于cached:cached在任务数量超过maximumPoolSize时直接抛出异常而不是将任务放入阻塞队列
+
+    -->
     <dubbo:provider retries="0" timeout="${dubbo-timeout}" threadpool="fixed" threads="100" accepts="1000"/>
+
+    <!--
+        集群模式：
+        failover(默认): 失败自动重试其他服务器服务，可以通过retries来限制重试次数
+        failsafe: 失败安全，出现异常时，直接忽略,通常用于写入审计日志
+        failback: 失败自动恢复，后台记录失败的请求，定时重发，通常用于消息通知操作
+        forking: 并行调用多个服务器，只要一个成功即返回，可以通过设置forks=2设置并行数
+        broadcast: 广播调用所有提供者，逐个调用，任意一台报错则报错,通常用于通知所有提供者更新缓存或日志等本地资源信息。
+        配置方式：
+        <dubbo:service cluster="failover" retries="2" .../>
+
+        负载均衡策略：
+        random: 随机
+        roundrobin: 轮询存在慢的提供者累积请求的问题，比如：第二台机器很慢，但没挂，当请求调到第二台时就卡在那，
+        久而久之，所有请求都卡在调到第二台上。
+        leastactive: 最少活跃调用数,相同活跃数的随机，活跃数指调用前后计数差。
+        使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大
+        hash: 一致性hash,默认只对第一个参数hash，可以通过<dubbo:parameter key="hash.arguments" value="0,1" />设置
+        默认160份，可以通过<dubbo:parameter key="hash.nodes" value="320" />修改
+    -->
 
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.zheng.springboot.service.HelloService" ref="helloService"
