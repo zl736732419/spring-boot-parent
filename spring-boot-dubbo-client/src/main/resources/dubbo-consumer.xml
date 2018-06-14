@@ -8,9 +8,31 @@
     <!-- 消费方应用名 -->
     <dubbo:application name="dubbo-consumer" />
 
-    <!-- 注册中心服务地址 -->
+    <!-- zookeeper注册中心 -->
     <dubbo:registry id="zookeeper" protocol="zookeeper" address="${dubbo.registry.address}" />
 
+    <!-- 
+        multicast注册中心
+        为了减少广播量，Dubbo 缺省使用单播发送提供者地址信息给消费者
+        如果一个机器上同时启了多个消费者进程，消费者需声明 unicast=false，
+        否则只会有一个消费者能收到消息
+    -->
+    <dubbo:registry protocol="multicast" address="224.5.6.7:1234">
+        <dubbo:parameter key="unicast" value="false" />
+    </dubbo:registry>
+
+    <!-- 
+        redis注册中心 
+        group: 用于设置redis key前缀，默认为dubbo
+        
+        cluster: 用于设置redis集群策略，缺省为failover 
+            failover: 只写入读取其中任意一台，失败重试另一台，需要服务器端自行配置数据同步
+            replicate: 客户端同时写入所有服务器，只读取单台，服务器不需要同步
+    -->
+    <!--<dubbo:registry address="redis://zl202:6379?backup=zl200:6379,zl201:6379" group="dubbo" />-->
+
+    
+    
     <dubbo:consumer retries="0" timeout="${dubbo-timeout}" check="${dubbo-check}"/>
 
     <import resource="dubbo-consumer-server-core.xml"/>

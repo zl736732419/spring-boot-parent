@@ -8,9 +8,27 @@
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="dubbo-service" />
 
-    <!-- 注册中心服务地址 -->
+    <!-- zookeeper注册中心 -->
     <dubbo:registry id="zookeeper" protocol="zookeeper" address="${dubbo.registry.address}" file="./cache/dubbo-server.cache" />
 
+    <!-- 
+        multicast注册中心
+        组播受网络结构限制，只适合小规模应用开发阶段使用。组播地址段: 224.0.0.0 - 239.255.255.255(D类地址)
+     -->
+    <!--<dubbo:registry address="multicast://224.5.6.7:1234" />-->
+
+    <!-- 
+        redis注册中心 
+        group: 用于设置redis key前缀，默认为dubbo
+        
+        cluster: 用于设置redis集群策略，缺省为failover 
+            failover: 只写入读取其中任意一台，失败重试另一台，需要服务器端自行配置数据同步
+            replicate: 客户端同时写入所有服务器，只读取单台，服务器不需要同步
+    -->
+    <!--<dubbo:registry address="redis://192.168.3.202:6379?backup=zl200:6379,zl201:6379" -->
+                    <!--group="dubbo" />-->
+    
+    
     <!-- 用dubbo协议在30001 -->
     <dubbo:protocol name="dubbo" port="30000" dispather="all" threadpool="cached" threads="5000"/>
 
