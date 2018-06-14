@@ -29,6 +29,8 @@
         <module>spring-boot-dbinit-default</module>
         <module>spring-boot-dbinit-flyway</module>
         <module>spring-boot-dbinit-liquibase</module>
+        <module>spring-boot-dubbo-server</module>
+        <module>spring-boot-dubbo-client</module>
     </modules>
 
     <parent>
@@ -81,6 +83,7 @@
     
     
     <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <plugins>
             <!-- Package as an executable jar -->
             <plugin>

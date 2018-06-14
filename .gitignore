@@ -32,3 +32,9 @@
 /spring-boot-dbinit-flyway/target/
 /spring-boot-dbinit-liquibase/target/
 /spring-boot-dbinit-liquibase/spring-boot-dbinit-liquibase.iml
+/spring-boot-dubbo-api/target/
+/spring-boot-dubbo-server/.idea/
+/spring-boot-dubbo-server/spring-boot-dubbo-server.iml
+/spring-boot-dubbo-client/target/
+/spring-boot-dubbo-server/target/
+/cache/
