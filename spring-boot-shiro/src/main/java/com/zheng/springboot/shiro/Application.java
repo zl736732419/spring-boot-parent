@@ -1,5 +1,6 @@
-package com.zheng.springboot;
+package com.zheng.springboot.shiro;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.ImportResource;
  * @Date 2018/5/14 11:19
  */
 @SpringBootApplication
+@MapperScan("com.zheng.springboot.shiro.dao")
 @ImportResource({"classpath:applicationContext-shiro.xml"})
 public class Application {
     public static void main(String[] args) {

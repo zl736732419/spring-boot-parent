@@ -1,4 +1,4 @@
-package com.zheng.springboot.enums;
+package com.zheng.springboot.shiro.enums;
 
 
 import java.util.Objects;

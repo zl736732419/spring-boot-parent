@@ -1,4 +1,4 @@
-package com.zheng.springboot.config;
+package com.zheng.springboot.shiro.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.boot.context.properties.ConfigurationProperties;
