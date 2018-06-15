@@ -3,6 +3,7 @@ package com.zheng.springboot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  * spring boot入口
@@ -16,6 +17,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @Date 2018/5/14 11:19
  */
 @SpringBootApplication
+@ImportResource({"classpath:applicationContext-shiro.xml"})
 public class Application {
     public static void main(String[] args) {
         runWithBuilder(args);
