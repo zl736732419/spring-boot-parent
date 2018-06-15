@@ -38,3 +38,5 @@
 /spring-boot-dubbo-client/target/
 /spring-boot-dubbo-server/target/
 /cache/
+/spring-boot-shiro/spring-boot-shiro.iml
+/spring-boot-shiro/target/

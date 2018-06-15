@@ -31,6 +31,7 @@
         <module>spring-boot-dbinit-liquibase</module>
         <module>spring-boot-dubbo-server</module>
         <module>spring-boot-dubbo-client</module>
+        <module>spring-boot-shiro</module>
     </modules>
 
     <parent>
