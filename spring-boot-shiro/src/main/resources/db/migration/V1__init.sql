@@ -15,6 +15,7 @@ CREATE TABLE `tb_url_resource` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '标识',
   `name` varchar(50) NOT NULL COMMENT '资源名称',
   `url` varchar(255) NOT NULL COMMENT '资源地址',
+  `sort_num` int(11) NOT NULL DEFAULT 1 COMMENT '排序字段',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   `is_delete` int(11) NOT NULL DEFAULT '0' COMMENT '是否删除 0未删除 1已删除',
@@ -36,3 +37,26 @@ CREATE TABLE `tb_user` (
   `is_delete` int(11) NOT NULL DEFAULT '0' COMMENT '是否删除 0未删除 1已删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 角色资源表
+CREATE TABLE `tb_role_url_resource` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '标识',
+  `role_id` int(11) NOT NULL COMMENT '角色id，对应tb_role.id',
+  `resource_id` int(11) NOT NULL COMMENT '资源id, 对应tb_url_resource.id',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_delete` int(11) NOT NULL DEFAULT '0' COMMENT '是否删除',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 用户角色表
+CREATE TABLE `tb_user_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '标识',
+  `user_id` int(11) NOT NULL COMMENT '用户标识，对应tb_user.id',
+  `role_id` int(11) NOT NULL COMMENT '角色标识，对应tb_role.id',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_delete` int(11) NOT NULL DEFAULT '0' COMMENT '是否删除',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

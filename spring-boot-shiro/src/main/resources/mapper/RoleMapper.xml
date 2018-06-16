@@ -91,6 +91,42 @@
         WHERE is_delete = 0
         ORDER BY update_time DESC
     </select>
+    <select id="findByResourceId" resultMap="BaseMap">
+        SELECT 
+        r.id,
+        r.name,
+        r.avatar,
+        r.status,
+        r.create_time,
+        r.update_time,
+        r.is_delete
+        FROM <include refid="tableName"/> r
+        inner join tb_role_url_resource rur
+            on r.id = rur.role_id
+            and r.is_delete = 0
+            and rur.is_delete = 0
+            and rur.resource_id = #{resourceId}
+    </select>
+    <select id="findByUsername" resultMap="BaseMap">
+        SELECT
+        r.id,
+        r.name,
+        r.avatar,
+        r.status,
+        r.create_time,
+        r.update_time,
+        r.is_delete
+        FROM <include refid="tableName"/> r
+        inner join tb_user_role ur
+            on r.id = ur.role_id
+            and r.is_delete = 0
+            and ur.is_delete = 0
+        inner join tb_user u 
+            on u.id = ur.user_id
+            and u.is_delete = 0
+            and u.username = #{username}
+        
+    </select>
 
     <update id="deleteById">
         UPDATE <include refid="tableName"/>

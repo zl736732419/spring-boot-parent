@@ -3,6 +3,8 @@ package com.zheng.springboot.shiro.service;
 
 import com.zheng.springboot.shiro.domain.UrlResource;
 
+import java.util.List;
+
 /**
  * UrlResource业务接口
  * @Author zhenglian
@@ -10,4 +12,10 @@ import com.zheng.springboot.shiro.domain.UrlResource;
  */
 public interface UrlResourceService extends BaseService<UrlResource> {
 
+    /**
+     * 查询指定角色所对应的权限
+     * @param roleIds
+     * @return
+     */
+    List<UrlResource> findByRoleIds(List<Integer> roleIds);
 }

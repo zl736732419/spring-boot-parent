@@ -4,29 +4,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * url权限资源
+ * 用户角色关联表
  * @Author zhenglian
- * @Date 15:17 2018/6/15
+ * @Date 2018/6/16 9:54
  */
-public class UrlResource implements Serializable {
+public class UserRole implements Serializable {
     /**
      * 标识
      */
     private Integer id;
     /**
-     * 资源名称
+     * 用户id
      */
-    private String name;
+    private Integer userId;
     /**
-     * 资源对应的url地址
+     * 角色id
      */
-    private String url;
-
-    /**
-     * 排序字段
-     */
-    private Integer sortNum;
-    
+    private Integer roleId;
     /**
      * 创建时间
      */
@@ -48,20 +42,20 @@ public class UrlResource implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getUrl() {
-        return url;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public Date getCreateTime() {
@@ -86,13 +80,5 @@ public class UrlResource implements Serializable {
 
     public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
-    }
-
-    public Integer getSortNum() {
-        return sortNum;
-    }
-
-    public void setSortNum(Integer sortNum) {
-        this.sortNum = sortNum;
     }
 }

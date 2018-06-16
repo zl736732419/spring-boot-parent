@@ -123,6 +123,12 @@
         WHERE is_delete = 0
         ORDER BY update_time DESC
     </select>
+    <select id="findByUsername" resultMap="BaseMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM <include refid="tableName"/>
+        where is_delete = 0
+        and username = #{username}
+    </select>
 
     <update id="deleteById">
         UPDATE <include refid="tableName"/>

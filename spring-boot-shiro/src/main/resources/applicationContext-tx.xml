@@ -23,6 +23,8 @@
             <tx:method name="create*" propagation="REQUIRED"/>
             <tx:method name="execute*" propagation="REQUIRED"/>
             <tx:method name="clear*" propagation="REQUIRED"/>
+            <tx:method name="do*" propagation="REQUIRED"/>
+            <tx:method name="relate*" propagation="REQUIRED"/>
             <tx:method name="*" read-only="true"/>
         </tx:attributes>
     </tx:advice>

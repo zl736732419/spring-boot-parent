@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zheng.springboot.shiro.dao.UrlResourceDao">
+<mapper namespace="com.zheng.springboot.shiro.dao.RoleUrlResourceDao">
 
-	<resultMap id="BaseMap" type="com.zheng.springboot.shiro.domain.UrlResource">
+	<resultMap id="BaseMap" type="com.zheng.springboot.shiro.domain.RoleUrlResource">
         <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="url" property="url" />
-        <result column="sort_num" property="sortNum" />
+        <result column="role_id" property="roleId" />
+        <result column="resource_id" property="resourceId" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="is_delete" property="isDelete" />
 	</resultMap>
 
-	<sql id="tableName">tb_url_resource</sql>
+	<sql id="tableName">tb_role_url_resource</sql>
 	<sql id="Base_Column_List">
             id,
-            name,
-            url,
-            sort_num,
+            role_id,
+            resource_id,
             create_time,
             update_time,
             is_delete
 	</sql>
-    <delete id="deleteByIds">
-        update <include refid="tableName"/>
-        set is_delete = 1
-        where id in 
-        <foreach collection="resourceIds" item="resourceId" open="(" close=")" separator=",">
-            #{resourceId}
-        </foreach>
-    </delete>
-
-    <select id="selectById" resultMap="BaseMap">
+	
+	<select id="selectById" resultMap="BaseMap">
 		SELECT <include refid="Base_Column_List"/>
 		FROM <include refid="tableName"/>
 		WHERE id = #{id}
@@ -42,11 +32,11 @@
         SELECT <include refid="Base_Column_List"/>
         FROM <include refid="tableName"/>
         <where>
-            <if test="filter.name != null and filter.name != ''">
-                    and name like concat('%', #{filter.name}, '%')
+            <if test="filter.roleId != null">
+                    and role_id = #{filter.roleId}
             </if>
-            <if test="filter.url != null and filter.url != ''">
-                    and url like concat('%', #{filter.url}, '%')
+            <if test="filter.resourceId != null">
+                    and resource_id = #{filter.resourceId}
             </if>
             <if test="filter.createTime != null">
                     and create_time = #{filter.createTime}
@@ -70,11 +60,11 @@
         SELECT <include refid="Base_Column_List"/>
         FROM <include refid="tableName"/>
         <where>
-            <if test="filter.name != null and filter.name != ''">
-                    and name like concat('%', #{filter.name}, '%')
+            <if test="filter.roleId != null">
+                    and role_id = #{filter.roleId}
             </if>
-            <if test="filter.url != null and filter.url != ''">
-                    and url like concat('%', #{filter.url}, '%')
+            <if test="filter.resourceId != null">
+                    and resource_id = #{filter.resourceId}
             </if>
             <if test="filter.createTime != null">
                     and create_time = #{filter.createTime}
@@ -93,23 +83,6 @@
         WHERE is_delete = 0
         ORDER BY update_time DESC
     </select>
-    <select id="findByRoleIds" resultMap="BaseMap">
-        SELECT ur.id,
-        ur.name,
-        ur.url,
-        ur.sort_num,
-        ur.create_time,
-        ur.update_time,
-        ur.is_delete
-        FROM <include refid="tableName"/> ur
-        inner join tb_role_url_resource rur
-        on rur.is_delete = 0
-        and ur.is_delete = 0
-        and rur.role_id in 
-        <foreach collection="roleIds" item="roleId" open="(" close=")" separator=",">
-            #{roleId}
-        </foreach>
-    </select>
 
     <update id="deleteById">
         UPDATE <include refid="tableName"/>
@@ -117,17 +90,14 @@
         WHERE id = #{id}
 	</update>
 	
-	<update id="update" parameterType="com.zheng.springboot.shiro.domain.UrlResource">
+	<update id="update" parameterType="com.zheng.springboot.shiro.domain.RoleUrlResource">
 		UPDATE <include refid="tableName"/>
 		<set>
-            <if test="name != null">
-                name = #{name},
+            <if test="roleId != null">
+                role_id = #{roleId},
             </if>
-            <if test="url != null">
-                url = #{url},
-            </if>
-            <if test="sortNum != null">
-                sort_num = #{sortNum},
+            <if test="resourceId != null">
+                resource_id = #{resourceId},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},
@@ -140,18 +110,15 @@
 		WHERE id = #{id}
 	</update>
 	
-	<insert id="insert" parameterType="com.zheng.springboot.shiro.domain.UrlResource"
+	<insert id="insert" parameterType="com.zheng.springboot.shiro.domain.RoleUrlResource"
 			useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO <include refid="tableName"/>(
                 id,
-                <if test="name != null">
-                    name,
+                <if test="roleId != null">
+                    role_id,
                 </if>
-                <if test="url != null">
-                    url,
-                </if>
-                <if test="sortNum != null">
-                    sort_num,
+                <if test="resourceId != null">
+                    resource_id,
                 </if>
                 create_time,
                 update_time,
@@ -159,18 +126,35 @@
         )
 		VALUES (
                 id,
-                <if test="name != null">
-                    #{name},
+                <if test="roleId != null">
+                    #{roleId},
                 </if>
-                <if test="url != null">
-                    #{url},
-                </if>
-                <if test="sortNum != null">
-                    #{sortNum},
+                <if test="resourceId != null">
+                    #{resourceId},
                 </if>
                 now(),
                 now(),
                 0
 		)
 	</insert>
+    <insert id="addRoleUrlResourceRelation">
+        insert into <include refid="tableName"/>
+        (
+            role_id,
+            resource_id,
+            create_time,
+            update_time,
+            is_delete
+        )
+        values 
+        <foreach collection="resourceIds" item="resourceId" separator=",">
+            (
+                #{roleId},
+                #{resourceId},
+                now(),
+                now(),
+                0
+            )
+        </foreach>
+    </insert>
 </mapper>
