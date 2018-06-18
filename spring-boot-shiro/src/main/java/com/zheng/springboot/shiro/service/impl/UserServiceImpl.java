@@ -6,6 +6,7 @@ import com.zheng.springboot.shiro.dao.UserDao;
 import com.zheng.springboot.shiro.domain.User;
 import com.zheng.springboot.shiro.enums.EnumUserStatus;
 import com.zheng.springboot.shiro.service.UserService;
+import com.zheng.springboot.shiro.utils.PasswordUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,8 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Resource
     private UserDao userDao;
+    @Resource
+    private PasswordUtil passwordUtil;
 
     @Override
     protected BaseDao<User> getBaseDao() {
@@ -64,7 +67,16 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         if (StringUtils.isEmpty(username)) {
             return null;
         }
-        
         return userDao.findByUsername(username);
+    }
+
+    @Override
+    public int insert(User user) {
+        // 这里需要修改用户密码进行加密
+        if (!Optional.ofNullable(user).isPresent()) {
+            return 0;
+        }
+        passwordUtil.encryptPassword(user);
+        return super.insert(user);
     }
 }

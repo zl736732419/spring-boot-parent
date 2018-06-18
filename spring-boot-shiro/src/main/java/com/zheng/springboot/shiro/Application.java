@@ -3,6 +3,7 @@ package com.zheng.springboot.shiro;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ImportResource;
 
 /**
@@ -17,8 +18,11 @@ import org.springframework.context.annotation.ImportResource;
  * @Date 2018/5/14 11:19
  */
 @SpringBootApplication
-@ImportResource({"classpath:applicationContext-tx.xml", 
-        "classpath:applicationContext-shiro.xml"})
+@ServletComponentScan
+@ImportResource({
+        "classpath:applicationContext-tx.xml"
+        ,"classpath:applicationContext-shiro.xml"
+})
 public class Application {
     public static void main(String[] args) {
         runWithBuilder(args);

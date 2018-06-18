@@ -55,7 +55,9 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
         if (!Optional.ofNullable(roleId).isPresent() || CollectionUtils.isEmpty(resourceIds)) {
             return;
         }
-        List<UrlResource> dbResources = urlResourceDao.findByRoleId(roleId);
+        List<Integer> roleIds = new ArrayList<>();
+        roleIds.add(roleId);
+        List<UrlResource> dbResources = urlResourceDao.findByRoleIds(roleIds);
         
         // 处理删除的资源
         deleteRoleResources(resourceIds, dbResources);

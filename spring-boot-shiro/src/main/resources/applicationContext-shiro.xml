@@ -18,16 +18,18 @@
         <property name="hashAlgorithmName" value="${credential.hash.algorithm}" />
         <property name="hashIterations" value="${credential.hash.iteration}" />
         <property name="storedCredentialsHexEncoded" value="true" />
+        <!-- 用户锁定时间，默认5分钟 -->
+        <property name="lockMinutes" value="1"/>
     </bean>
 
     <!-- Realm实现 -->
     <bean id="userRealm" class="com.zheng.springboot.shiro.comps.UserRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher" />
-        <property name="cachingEnabled" value="true" />
-        <property name="authenticationCachingEnabled" value="true" />
-        <property name="authenticationCacheName" value="authenticationCache" />
-        <property name="authorizationCachingEnabled" value="true" />
-        <property name="authorizationCacheName" value="authorizationCache" />
+        <property name="cachingEnabled" value="false" />
+        <!--<property name="authenticationCachingEnabled" value="true" />-->
+        <!--<property name="authenticationCacheName" value="authenticationCache" />-->
+        <!--<property name="authorizationCachingEnabled" value="true" />-->
+        <!--<property name="authorizationCacheName" value="authorizationCache" />-->
     </bean>
 
     <!-- 会话ID生成器 -->
@@ -96,28 +98,43 @@
     <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
         <property name="usernameParam" value="username"/>
         <property name="passwordParam" value="password"/>
-        <!--<property name="rememberMeParam" value="rememberMe"></property>-->
-        <property name="loginUrl" value="/views/login.html"/>
+        <property name="rememberMeParam" value="rememberMe"></property>
+        <property name="loginUrl" value="/login"/>
     </bean>
+    
+    <!-- 登出过滤器 -->
+    <bean id="myLogoutFilter" class="com.zheng.springboot.shiro.comps.MyLogoutFilter">
+        <property name="redirectUrl" value="/login"/>
+        <property name="logoutUrl" value="/logout"/>
+    </bean>
+    
+    <!-- 并发登录用户踢出 -->
+    <bean id="kickoutSessionFilter" class="com.zheng.springboot.shiro.comps.KickoutSessionFilter">
+        <property name="kickoutUrl" value="/login"/>
+        <property name="maxSession" value="1"/>
+        <property name="cacheManager" ref="cacheManager" />
+    </bean>
+    
 
     <!-- 采用动态url权限控制 -->
     <bean id="filterChainManager" class="com.zheng.springboot.shiro.comps.CustomDefaultFilterChainManager">
-        <property name="loginUrl" value="/login.jsp"/>
-        <property name="successUrl" value="/"/>
-        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <property name="loginUrl" value="/login"/>
+        <property name="successUrl" value="/list"/>
+        <property name="unauthorizedUrl" value="/unauthorized"/>
 
         <property name="customFilters">
             <util:map>
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
-                <!--<entry key="kickout" value-ref="kickoutSessionFilter"/>-->
+                <entry key="myLogout" value-ref="myLogoutFilter"/>
+                <entry key="kickout" value-ref="kickoutSessionFilter"/>
             </util:map>
         </property>
         <property name="defaultFilterChainDefinitions">
             <value>
-                /login.html = authc
-                /logout = logout
-                /unauthorized.html = authc
-                /** = user
+                /login.ftl = anon
+                /unauthorized.ftl = authc
+                /logout = myLogout
+                /** = user,kickout
             </value>
         </property>
     </bean>

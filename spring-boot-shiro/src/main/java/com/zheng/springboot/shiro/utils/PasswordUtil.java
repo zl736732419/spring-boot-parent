@@ -28,7 +28,8 @@ public class PasswordUtil {
      * @param user
      */
     public void encryptPassword(User user) {
-        user.setSalt(randomNumberGenerator.nextBytes().toHex());
+        String salt = randomNumberGenerator.nextBytes().toHex();
+        user.setSalt(salt);
         String newPassword = new SimpleHash(
                 algorithmName,
                 user.getPassword(),

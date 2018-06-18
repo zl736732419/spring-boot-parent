@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 将ShiroFactoryBean和DefaultFilterChainManager
  * @Author zhenglian
  * @Date 2018/6/16 15:31
  */
@@ -57,8 +58,7 @@ public class CustomDefaultFilterChainManager extends DefaultFilterChainManager {
         ini.load(definitions);
         // did they explicitly state a 'urls' section? Not necessary, but just
         // in case:
-        Ini.Section section = ini
-                .getSection(IniFilterChainResolverFactory.URLS);
+        Ini.Section section = ini.getSection(IniFilterChainResolverFactory.URLS);
         if (MapUtils.isEmpty(section)) {
             // no urls section. Since this _is_ a urls chain definition
             // property, just assume the

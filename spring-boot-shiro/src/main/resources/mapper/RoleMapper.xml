@@ -5,6 +5,7 @@
 	<resultMap id="BaseMap" type="com.zheng.springboot.shiro.domain.Role">
         <id column="id" property="id" />
         <result column="name" property="name" />
+        <result column="role_tag" property="roleTag" />
         <result column="avatar" property="avatar" />
         <result column="status" property="status" />
         <result column="create_time" property="createTime" />
@@ -16,6 +17,7 @@
 	<sql id="Base_Column_List">
             id,
             name,
+            role_tag,
             avatar,
             status,
             create_time,
@@ -39,6 +41,9 @@
             </if>
             <if test="filter.avatar != null and filter.avatar != ''">
                     and avatar like concat('%', #{filter.avatar}, '%')
+            </if>
+            <if test="filter.roleTag != null and filter.roleTag != ''">
+                and role_tag like concat('%', #{filter.roleTag}, '%')
             </if>
             <if test="filter.status != null">
                     and status = #{filter.status}
@@ -68,6 +73,9 @@
             <if test="filter.name != null and filter.name != ''">
                     and name like concat('%', #{filter.name}, '%')
             </if>
+            <if test="filter.roleTag != null and filter.roleTag != ''">
+                and role_tag like concat('%', #{filter.roleTag}, '%')
+            </if>
             <if test="filter.avatar != null and filter.avatar != ''">
                     and avatar like concat('%', #{filter.avatar}, '%')
             </if>
@@ -95,6 +103,7 @@
         SELECT 
         r.id,
         r.name,
+        r.role_tag,
         r.avatar,
         r.status,
         r.create_time,
@@ -111,6 +120,7 @@
         SELECT
         r.id,
         r.name,
+        r.role_tag,
         r.avatar,
         r.status,
         r.create_time,
@@ -140,6 +150,9 @@
             <if test="name != null">
                 name = #{name},
             </if>
+            <if test="roleTag != null">
+                role_tag = #{roleTag},
+            </if>
             <if test="avatar != null">
                 avatar = #{avatar},
             </if>
@@ -164,6 +177,9 @@
                 <if test="name != null">
                     name,
                 </if>
+                <if test="roleTag != null">
+                    role_tag,
+                </if>
                 <if test="avatar != null">
                     avatar,
                 </if>
@@ -178,6 +194,9 @@
                 id,
                 <if test="name != null">
                     #{name},
+                </if>
+                <if test="roleTag != null">
+                    #{roleTag},
                 </if>
                 <if test="avatar != null">
                     #{avatar},

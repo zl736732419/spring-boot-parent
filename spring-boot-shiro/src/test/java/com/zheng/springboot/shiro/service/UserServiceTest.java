@@ -7,6 +7,7 @@ import com.zheng.springboot.shiro.domain.MyPageList;
 import com.zheng.springboot.shiro.domain.User;
 import com.zheng.springboot.shiro.enums.EnumUserStatus;
 import com.zheng.springboot.shiro.filter.UserFilter;
+import com.zheng.springboot.shiro.utils.PasswordUtil;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -20,14 +21,15 @@ public class UserServiceTest extends BaseServiceTest {
 
     @Resource
     private UserService userService;
-
+    @Resource
+    private PasswordUtil passwordUtil;
+    
     @Test
     public void save() {
         User user = new User();
         user.setUsername("zl");
         user.setPassword("123456");
         user.setNickname("小炼");
-        user.setSalt("null");
         user.setStatus(EnumUserStatus.OK.getKey());
         user.setAvatar("http://www.baidu.com");
         userService.insert(user);

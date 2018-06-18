@@ -6,5 +6,6 @@
 </head>
 <body>
 <div>list页面</div>
+登录用户：${user.nickname}
 </body>
 </html>

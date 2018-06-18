@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  */
 @Component
 public class ShiroFilterChainManager {
-    @Resource
+    @Resource(name = "customDefaultFilterChainManager")
     private DefaultFilterChainManager manager;
     @Resource
     private RoleDao roleDao;

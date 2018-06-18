@@ -5,6 +5,8 @@
   <title>Title</title>
 </head>
 <body>
-  <div>登录界面</div>
+  
+  <div>没有权限</div>
+
 </body>
 </html>

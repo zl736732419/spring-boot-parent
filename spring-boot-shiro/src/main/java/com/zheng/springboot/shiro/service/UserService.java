@@ -31,5 +31,4 @@ public interface UserService extends BaseService<User> {
      * @return
      */
     User findByUsername(String username);
-
 }

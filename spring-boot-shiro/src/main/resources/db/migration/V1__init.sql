@@ -2,6 +2,7 @@
 CREATE TABLE `tb_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '标识',
   `name` varchar(50) NOT NULL COMMENT '角色名称',
+  `role_tag` varchar(50) NOT NULL COMMENT '角色标识，用于shiro权限认证',
   `avatar` varchar(255) DEFAULT NULL COMMENT '角色头像',
   `status` int(11) NOT NULL DEFAULT '100' COMMENT '角色状态 100正常 10禁用',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',

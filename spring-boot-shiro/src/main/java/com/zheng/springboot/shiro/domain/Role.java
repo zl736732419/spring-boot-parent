@@ -13,6 +13,12 @@ public class Role implements Serializable {
      * 标识
      */
     private Integer id;
+
+    /**
+     * 角色标识，用于shiro权限识别
+     */
+    private String roleTag;
+    
     /**
      * 角色名称
      */
@@ -47,6 +53,14 @@ public class Role implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getRoleTag() {
+        return roleTag;
+    }
+
+    public void setRoleTag(String roleTag) {
+        this.roleTag = roleTag;
     }
 
     public String getName() {

@@ -34,7 +34,7 @@ public class CustomPathMatchingFilterChainResolver extends PathMatchingFilterCha
 
         String requestURI = getPathWithinApplication(request);
 
-        List<String> chainNames = new ArrayList<String>();
+        List<String> chainNames = new ArrayList<>();
         // the 'chain names' in this implementation are actually path patterns
         // defined by the user. We just use them
         // as the chain name for the FilterChainManager's requirements
