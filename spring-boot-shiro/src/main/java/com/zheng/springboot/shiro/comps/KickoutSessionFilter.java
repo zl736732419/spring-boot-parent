@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.session.SessionException;
 import org.apache.shiro.session.mgt.DefaultSessionKey;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.subject.Subject;
@@ -126,7 +127,17 @@ public class KickoutSessionFilter extends AccessControlFilter {
             } else {
                 kickoutSessionId = deque.removeFirst();
             }
-            kickoutSession = sessionManager.getSession(new DefaultSessionKey(kickoutSessionId));
+            try {
+                kickoutSession = sessionManager.getSession(new DefaultSessionKey(kickoutSessionId));
+            } catch(SessionException e) {
+                kickoutSession = null;
+            }
+
+            // logout之后，session已经被移除，所以这里就无须在进行处理
+            if (!Optional.ofNullable(kickoutSession).isPresent()) {
+                continue;
+            }
+
             if (Optional.ofNullable(kickoutSession).isPresent()) {
                 kickoutSession.setAttribute(KICK_OUT_ATTR, "true");
             }

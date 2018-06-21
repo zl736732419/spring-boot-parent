@@ -16,7 +16,7 @@
         <ul>
             <li>用户名：<input type="text" name="username" value=""/></li>
             <li>密码：<input type="text" name="password" value=""/></li>
-            <li>记住我<input type="checkbox" name="rememberMe" value=""/></li>
+            <li>记住我<input type="checkbox" name="rememberMe" value="1"/></li>
             <li><input type="submit" value="登录"/></li>
         </ul>
         <div class="error">${error}</div>
