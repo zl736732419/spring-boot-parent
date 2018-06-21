@@ -134,7 +134,7 @@
                 /login.ftl = anon
                 /unauthorized.ftl = authc
                 /logout = myLogout
-                /** = user,kickout
+                /** = kickout, user
             </value>
         </property>
     </bean>
